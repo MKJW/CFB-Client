@@ -19,10 +19,14 @@ public class FunctionArrayAdapter extends RecyclerView.Adapter<RecyclerView.View
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         TextView functionTextView;
+        TextView functionNameTextView;
+        TextView hashTagTextView;
 
         MyViewHolder(View view){
             super(view);
             functionTextView = view.findViewById(R.id.functionTextView);
+            functionNameTextView = view.findViewById(R.id.functionNameTextView);
+            hashTagTextView = view.findViewById(R.id.hashTagTextView);
         }
     }
     ArrayList<FunctionArray> items;
@@ -44,6 +48,8 @@ public class FunctionArrayAdapter extends RecyclerView.Adapter<RecyclerView.View
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         MyViewHolder myViewHolder = (MyViewHolder) holder;
         myViewHolder.functionTextView.setText(items.get(position).getEquation());
+        myViewHolder.functionNameTextView.setText(items.get(position).getNameOfEquation());
+        //해쉬테그 불러오기...
     }
 
     @Override
