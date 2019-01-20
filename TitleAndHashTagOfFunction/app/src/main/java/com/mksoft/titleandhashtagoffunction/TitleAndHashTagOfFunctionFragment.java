@@ -1,0 +1,113 @@
+package com.mksoft.titleandhashtagoffunction;
+
+import android.app.Activity;
+import android.content.Context;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
+public class TitleAndHashTagOfFunctionFragment extends Fragment {
+
+    Retrofit retrofit;
+    WebService functionWebService;
+    EditText nameOfEquationEditText;
+    EditText hashTagOfEquationEditText;
+    Button submitButton;
+    String equationString;
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater,
+                             @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
+        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.title_and_hash_tag_of_function, container, false);
+        initUI(rootView);
+        initRepos();
+        clickSubmitButton();
+        //test();
+        return rootView;
+    }
+    private void test(){
+        MakeFunctionArray makeFunctionArray1 = new MakeFunctionArray("x + y + z", "명기 공식", "#더하기 #명기 #기본");
+
+        makeFunctionArray1.parsingInputString();
+        makeFunctionArray1.insertFunctionArray();
+        MakeFunctionArray makeFunctionArray2 = new MakeFunctionArray("x * y * z", "재원 공식", "#곱하기 #재원 #기본");
+        makeFunctionArray2.parsingInputString();
+        makeFunctionArray2.insertFunctionArray();
+        MakeFunctionArray makeFunctionArray3 = new MakeFunctionArray("x / y * z", "쩌는 공식", "#심화 #곱하기 #나누기");
+        makeFunctionArray3.parsingInputString();
+        makeFunctionArray3.insertFunctionArray();
+        MakeFunctionArray makeFunctionArray4 = new MakeFunctionArray("x - y + z", "공식", "#더하기 #빼기 #심화 #기본");
+        makeFunctionArray4.parsingInputString();
+        makeFunctionArray4.insertFunctionArray();
+        postFunction(makeFunctionArray1.getFunctionArray());
+        postFunction(makeFunctionArray2.getFunctionArray());
+        postFunction(makeFunctionArray3.getFunctionArray());
+        postFunction(makeFunctionArray4.getFunctionArray());
+
+    }
+    private void initUI(ViewGroup rootView){
+        nameOfEquationEditText = rootView.findViewById(R.id.nameOfEquationEditText);
+
+        hashTagOfEquationEditText = rootView.findViewById(R.id.hashTagOfEquationEditText);
+        submitButton = rootView.findViewById(R.id.submitButton);
+
+    }
+
+    private void initRepos(){
+        retrofit = new Retrofit.Builder().baseUrl("http://114.202.9.170:8080").addConverterFactory(GsonConverterFactory.create()).build();
+        functionWebService = retrofit.create(WebService.class);
+    }
+
+    private void clickSubmitButton(){
+        submitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                MakeFunctionArray makeFunctionArray = new MakeFunctionArray(equationString, nameOfEquationEditText.getText().toString(), hashTagOfEquationEditText.getText().toString());                makeFunctionArray.parsingInputString();
+
+                makeFunctionArray.parsingInputString();
+                makeFunctionArray.insertFunctionArray();
+                if(makeFunctionArray.isSuccess == true){
+                    postFunction(makeFunctionArray.getFunctionArray());
+                }
+
+            }
+        });
+    }
+    private void postFunction(FunctionArray functionArray){
+        Call<String> call = functionWebService.postFunction(functionArray);
+        call.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                Toast.makeText(getActivity().getApplicationContext(), "success", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+
+                Toast.makeText(getActivity().getApplicationContext(), "fail", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+}
