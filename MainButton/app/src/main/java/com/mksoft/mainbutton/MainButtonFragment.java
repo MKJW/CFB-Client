@@ -25,7 +25,7 @@ public class MainButtonFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        initFragment();
+
 
     }
 
@@ -34,6 +34,7 @@ public class MainButtonFragment extends Fragment {
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.main_button, container, false);
+        initFragment();
         initUI(rootView);
 
         return rootView;
@@ -47,7 +48,7 @@ public class MainButtonFragment extends Fragment {
         optionButton = rootView.findViewById(R.id.optionButton);
 
         contentFrameLayout = rootView.findViewById(R.id.contentFrameLayout);
-        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.contentFrameLayout, viewAllFunctionFragment).commit();
+        getChildFragmentManager().beginTransaction().replace(R.id.contentFrameLayout, viewAllFunctionFragment).commit();
         //기본 화면 초기화...
     }
 

@@ -43,7 +43,7 @@ public class TitleAndHashTagOfFunctionFragment extends Fragment {
         initUI(rootView);
         initRepos();
         clickSubmitButton();
-        //test();
+        test();
         return rootView;
     }
     private void test(){

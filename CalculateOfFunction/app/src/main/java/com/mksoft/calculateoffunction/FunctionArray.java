@@ -8,14 +8,14 @@ public class FunctionArray {
     private String equation = null;
     Object[] nameOfVariables = null;
     String nameOfEquation = null;
-    Object[] hashOfEquation = null;
+    Object[] hashTags = null;
 
     public FunctionArray(String equation, Object[] nameOfVariables, String nameOfEquation, Object[] hashOfEquation) {
 
         this.equation = equation;
         this.nameOfVariables = nameOfVariables;
         this.nameOfEquation = nameOfEquation;
-        this.hashOfEquation = hashOfEquation;
+        this.hashTags = hashOfEquation;
 
     }
 
@@ -42,7 +42,7 @@ public class FunctionArray {
                 ", equation='" + equation + '\'' +
                 ", nameOfVariables=" + Arrays.toString(nameOfVariables) +
                 ", nameOfEquation='" + nameOfEquation + '\'' +
-                ", hashOfEquation=" + Arrays.toString(hashOfEquation) +
+                ", hashOfEquation=" + Arrays.toString(hashTags) +
                 '}';
     }
 
@@ -63,7 +63,7 @@ public class FunctionArray {
     }
 
     public Object[] getHashOfEquation() {
-        return hashOfEquation;
+        return hashTags;
     }
 
     public void setId(int id) {
@@ -84,7 +84,7 @@ public class FunctionArray {
     }
 
     public void setHashOfEquation(Object[] hashOfEquation) {
-        this.hashOfEquation = hashOfEquation;
+        this.hashTags = hashOfEquation;
     }
 
 }
