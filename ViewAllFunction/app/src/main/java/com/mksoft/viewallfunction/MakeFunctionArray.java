@@ -1,4 +1,4 @@
-package com.mksoft.titleandhashtagoffunction;
+package com.mksoft.viewallfunction;
 
 import android.util.Log;
 

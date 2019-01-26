@@ -1,4 +1,4 @@
-package com.mksoft.titleandhashtagoffunction;
+package com.mksoft.creatingfunctionbody;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -49,7 +49,7 @@ public class TitleAndHashTagOfFunctionFragment extends Fragment {
         initUI(rootView);
         initRepos();
         clickSubmitButton();
-
+        //clickBackButton();
         //test();
         return rootView;
     }
@@ -72,6 +72,14 @@ public class TitleAndHashTagOfFunctionFragment extends Fragment {
         functionWebService = retrofit.create(WebService.class);
     }
 
+    /*private void clickBackButton(){
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mainActivity.onFragmentChange(2, null);
+            }
+        });
+    }*/
     private void clickSubmitButton(){
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override

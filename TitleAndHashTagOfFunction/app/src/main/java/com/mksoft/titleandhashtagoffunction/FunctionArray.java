@@ -5,22 +5,22 @@ import java.util.Arrays;
 
 public class FunctionArray {
     int id = 0;
-    private String equation = null;
+    private String expression = null;
     Object[] nameOfVariables = null;
-    String nameOfEquation = null;
-    Object[] hashTags = null;
+    String title = null;
+    TagData[] hashtags = null;
 
-    public FunctionArray(String equation, Object[] nameOfVariables, String nameOfEquation, Object[] hashOfEquation) {
+    public FunctionArray(String equation, Object[] nameOfVariables, String nameOfEquation, TagData[] hashOfEquation) {
 
-        this.equation = equation;
+        this.expression = equation;
         this.nameOfVariables = nameOfVariables;
-        this.nameOfEquation = nameOfEquation;
-        this.hashTags = hashOfEquation;
+        this.title = nameOfEquation;
+        this.hashtags =  hashOfEquation;
 
     }
 
     public FunctionArray(String functionString, Object[] functionOfValue){
-        this.equation = functionString;
+        this.expression = functionString;
         this.nameOfVariables =  functionOfValue;
 
 
@@ -28,21 +28,20 @@ public class FunctionArray {
 
 
     public FunctionArray(String functionString, String[] functionOfValue, int countOfValue, int id){
-        this.equation = functionString;
+        this.expression = functionString;
         this.nameOfVariables = new Object[countOfValue];
         this.nameOfVariables =  functionOfValue;
         this.id=id;
     }
 
-
     @Override
     public String toString() {
         return "FunctionArray{" +
                 "id=" + id +
-                ", equation='" + equation + '\'' +
+                ", expression='" + expression + '\'' +
                 ", nameOfVariables=" + Arrays.toString(nameOfVariables) +
-                ", nameOfEquation='" + nameOfEquation + '\'' +
-                ", hashOfEquation=" + Arrays.toString(hashTags) +
+                ", title='" + title + '\'' +
+                ", hashTags=" + Arrays.toString(hashtags) +
                 '}';
     }
 
@@ -50,28 +49,26 @@ public class FunctionArray {
         return id;
     }
 
-    public String getEquation() {
-        return equation;
+    public String getExpression() {
+        return expression;
     }
 
     public Object[] getNameOfVariables() {
         return nameOfVariables;
     }
 
-    public String getNameOfEquation() {
-        return nameOfEquation;
-    }
 
-    public Object[] getHashOfEquation() {
-        return hashTags;
+
+    public TagData[] getHashtags() {
+        return hashtags;
     }
 
     public void setId(int id) {
         this.id = id;
     }
 
-    public void setEquation(String equation) {
-        this.equation = equation;
+    public void setExpression(String expression) {
+        this.expression = expression;
     }
 
     public void setNameOfVariables(Object[] nameOfVariables) {
@@ -79,12 +76,15 @@ public class FunctionArray {
     }
 
 
-    public void setNameOfEquation(String nameOfEquation) {
-        this.nameOfEquation = nameOfEquation;
+    public void setHashtags(Object[] hashTags) {
+        this.hashtags = (TagData[])hashTags;
     }
 
-    public void setHashOfEquation(Object[] hashOfEquation) {
-        this.hashTags = hashOfEquation;
+    public String getTitle() {
+        return title;
     }
 
+    public void setTitle(String title) {
+        this.title = title;
+    }
 }

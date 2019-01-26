@@ -1,4 +1,4 @@
-package com.mksoft.creatingfunctionbody;
+package com.mksoft.mainbutton.FunctionAddPage;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -7,9 +7,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import com.mksoft.mainbutton.DataType.FunctionArray;
+import com.mksoft.mainbutton.DataType.MakeFunctionArray;
+import com.mksoft.mainbutton.MainActivity;
+import com.mksoft.mainbutton.R;
+import com.mksoft.mainbutton.WebService;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -40,7 +50,7 @@ public class MakeFunctionFragment extends Fragment {
         initUI(rootView);
         clickNextButton();
         initRepos();
-        //clickBackButton();
+        clickBackButton();
         return rootView;
     }
 
@@ -67,12 +77,12 @@ public class MakeFunctionFragment extends Fragment {
             }
         });
     }
-    /*private void clickBackButton(){
+    private void clickBackButton(){
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 mainActivity.onFragmentChange(1, null);//메인버튼페이지로 돌아감
             }
         });
-    }*/
+    }
 }

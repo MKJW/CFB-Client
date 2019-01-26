@@ -7,9 +7,11 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.mksoft.mainbutton.DataType.FunctionArray;
+import com.mksoft.mainbutton.DataType.TagData;
 import com.mksoft.mainbutton.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -47,8 +49,22 @@ public class FunctionArrayAdapter extends RecyclerView.Adapter<RecyclerView.View
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         MyViewHolder myViewHolder = (MyViewHolder) holder;
-        myViewHolder.functionTextView.setText(items.get(position).getEquation());
-        myViewHolder.functionNameTextView.setText(items.get(position).getNameOfEquation());
+        myViewHolder.functionTextView.setText(items.get(position).getExpression());
+        myViewHolder.functionNameTextView.setText(items.get(position).getTitle());
+        TagData[] tagData =  items.get(position).getHashtags();
+        if(tagData.length<4){
+            String tempHash = "";
+            for(int i =0;i<tagData.length; i++){
+                tempHash += "#"+tagData[i].getTagName()+" ";
+            }
+            myViewHolder.hashTagTextView.setText(tempHash);
+        }else{
+            String tempHash = "";
+            for(int i =0; i<3;i++){
+                tempHash += tagData[i].getTagName()+" ";
+            }
+            myViewHolder.hashTagTextView.setText(tempHash);
+        }
         //해쉬테그 불러오기...
     }
 

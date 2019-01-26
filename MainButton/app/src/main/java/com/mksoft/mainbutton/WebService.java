@@ -22,6 +22,6 @@ public interface WebService {
 
 
     @POST("/save")
-    Call<FunctionArray> postFunction(@Body FunctionArray functionArray);
+    Call<String> postFunction(@Body FunctionArray functionArray);
 
 }

@@ -6,11 +6,16 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.FrameLayout;
 
+import com.mksoft.mainbutton.FunctionAddPage.MakeFunctionFragment;
+import com.mksoft.mainbutton.FunctionAddPage.hashtagAndTitle.TitleAndHashTagOfFunctionFragment;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
     MainButtonFragment mainButtonFragment;
+    MakeFunctionFragment makeFunctionFragment;
+    TitleAndHashTagOfFunctionFragment titleAndHashTagOfFunctionFragment;
     InputMethodManager imm;
     FrameLayout mainContainer;
     @Override
@@ -22,6 +27,9 @@ public class MainActivity extends AppCompatActivity {
 
     private void init(){
         mainButtonFragment = new MainButtonFragment();
+        makeFunctionFragment = new MakeFunctionFragment();
+        titleAndHashTagOfFunctionFragment = new TitleAndHashTagOfFunctionFragment();
+
         imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
         mainContainer = findViewById(R.id.mainContainer);
         mainContainer.setOnClickListener(new View.OnClickListener() {
@@ -29,7 +37,21 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),0);
             }
-        });
-        getSupportFragmentManager().beginTransaction().replace(R.id.mainContainer, mainButtonFragment).commit();
+        });//클릭시 키보드 숨기기
+        getSupportFragmentManager().beginTransaction().replace(R.id.mainContainer, mainButtonFragment).commit();//처음 기본 플레그먼트 설정
+    }
+    public void onFragmentChange(int idx, Bundle bundle){
+        if(idx == 1){
+
+            getSupportFragmentManager().beginTransaction().replace(R.id.mainContainer, mainButtonFragment).commit();
+            //메인버튼 프레그먼트
+        }else if(idx == 2){
+
+            getSupportFragmentManager().beginTransaction().replace(R.id.mainContainer, makeFunctionFragment).commit();
+            //add 페이지
+        }else if(idx == 3){
+            titleAndHashTagOfFunctionFragment.setArguments(bundle);
+            getSupportFragmentManager().beginTransaction().replace(R.id.mainContainer, titleAndHashTagOfFunctionFragment).commit();
+        }
     }
 }

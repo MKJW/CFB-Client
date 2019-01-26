@@ -8,9 +8,15 @@ public class MakeFunctionArray {
     private int numOfVariables = 0;
     private FunctionArray functionArray;
     private String[] nameOfVariables;
+    private String nameOfEquation;
+    private TagData[] hashTagOfEquation;
+    private String tempHashTagString;
+    private int numOfHashTag;
 
-    public MakeFunctionArray(String inputString){
-        this.equation = inputString;
+    public MakeFunctionArray(String equation, String nameOfEquation, String hashTagOfEquation){
+        this.equation = equation;
+        this.nameOfEquation = nameOfEquation;
+        this.tempHashTagString = hashTagOfEquation;
 
     }
     public void insertFunctionArray(){
@@ -26,8 +32,15 @@ public class MakeFunctionArray {
             Log.d("error zero", "countOfValue zero");
             return;
         }
+        if(nameOfEquation == null){
+            Log.d("error nuLL", "nameOfEquation NULL");
+            return;
+        }
+        if(hashTagOfEquation[0] == null){
 
-        functionArray = new FunctionArray(equation, nameOfVariables);
+            Log.d("error nuLL", "hashTagOfEquation NULL");
+        }
+        functionArray = new FunctionArray(equation, nameOfVariables, nameOfEquation, hashTagOfEquation);
         isSuccess = true;
         return;
     }
@@ -36,6 +49,11 @@ public class MakeFunctionArray {
             Log.d("error nuLL", "functionString NULL");
             return;
         }
+        if(tempHashTagString == null){
+            Log.d("error nuLL", "hashTagString NULL");
+            return;
+        }
+
         String tempInputString = equation;
         tempInputString = tempInputString.replace('+', ' ');
         tempInputString = tempInputString.replace('-', ' ');
@@ -61,6 +79,26 @@ public class MakeFunctionArray {
             j++;
 
         }
+        //여기까지가 함수 변수 파싱
+
+        String[] tempHashTag = tempHashTagString.split("#");
+        for(String temp : tempHashTag){
+            if(temp.length() !=0){
+                this.numOfHashTag++;
+            }
+        }
+        hashTagOfEquation = new TagData[numOfHashTag];
+        i =0;
+        j =0;
+        for(String temp : tempHashTag){
+            if(temp.length() != 0){
+                hashTagOfEquation[i].setTagName( tempHashTag[j]);
+                i++;
+            }
+            j++;
+
+        }
+
     }
 
     public FunctionArray getFunctionArray(){

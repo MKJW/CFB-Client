@@ -2,7 +2,6 @@ package com.mksoft.viewallfunction;
 
 
 import java.util.ArrayList;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -21,6 +20,6 @@ public interface WebService {
 
 
     @POST("/save")
-    Call<FunctionArray> postFunction(@Body FunctionArray functionArray);
+    Call<String> postFunction(@Body FunctionArray functionArray);
 
 }

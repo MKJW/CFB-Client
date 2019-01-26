@@ -1,4 +1,4 @@
-package com.mksoft.titleandhashtagoffunction;
+package com.mksoft.mainbutton.FunctionAddPage.hashtagAndTitle;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -9,6 +9,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.mksoft.mainbutton.DataType.FunctionArray;
+import com.mksoft.mainbutton.DataType.MakeFunctionArray;
+import com.mksoft.mainbutton.MainActivity;
+import com.mksoft.mainbutton.R;
+import com.mksoft.mainbutton.WebService;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -49,7 +55,7 @@ public class TitleAndHashTagOfFunctionFragment extends Fragment {
         initUI(rootView);
         initRepos();
         clickSubmitButton();
-
+        clickBackButton();
         //test();
         return rootView;
     }
@@ -72,6 +78,14 @@ public class TitleAndHashTagOfFunctionFragment extends Fragment {
         functionWebService = retrofit.create(WebService.class);
     }
 
+    private void clickBackButton(){
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mainActivity.onFragmentChange(2, null);
+            }
+        });
+    }
     private void clickSubmitButton(){
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override

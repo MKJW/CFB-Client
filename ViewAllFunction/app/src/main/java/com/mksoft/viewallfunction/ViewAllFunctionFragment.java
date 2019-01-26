@@ -1,5 +1,6 @@
 package com.mksoft.viewallfunction;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -28,10 +29,18 @@ public class ViewAllFunctionFragment extends Fragment {
     FunctionArrayAdapter functionArrayAdapter;
     Button sortButton;
     Button addButton;
+    MainActivity mainActivity;//메인엑티비티에서 요청을 하기위하여 필요.
+
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mainActivity = (MainActivity)getActivity();
     }
 
     @Override
@@ -42,6 +51,7 @@ public class ViewAllFunctionFragment extends Fragment {
         initUI(rootView);
         initRepos();
         getAllFunction();//통신
+        //clickAddButton();
         return rootView;
     }
 
@@ -72,6 +82,7 @@ public class ViewAllFunctionFragment extends Fragment {
             public void onResponse(Call<ArrayList<FunctionArray>> call, Response<ArrayList<FunctionArray>> response) {
                 if(response.isSuccessful() ==true && response.body() != null) {
                     functionArrayAdapter = new FunctionArrayAdapter(getContext(), response.body());
+                    Log.d("서버응답", response.body().get(0).getHashtags()[0].getTagName());
                     recyclerView.setAdapter(functionArrayAdapter);
 
                 }
@@ -84,8 +95,20 @@ public class ViewAllFunctionFragment extends Fragment {
             }
         });
     }
+    /*private void clickAddButton(){
+        addButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //요청
+                mainActivity.onFragmentChange(2, null);//2번 페이지 add페이지로 넘어가기
+            }
+        });
 
 
+
+    }//메인으로 애드페이지를 띄우라고 요청하는 함수
+
+    */
 
 
 }
