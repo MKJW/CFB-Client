@@ -1,4 +1,4 @@
-package com.mksoft.viewallfunction;
+package com.mksoft.mainbutton.ViewAllFunction;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -7,6 +7,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
+
+import com.mksoft.mainbutton.DataType.FunctionArray;
+import com.mksoft.mainbutton.R;
+import com.mksoft.mainbutton.WebService;
 
 import java.util.ArrayList;
 
