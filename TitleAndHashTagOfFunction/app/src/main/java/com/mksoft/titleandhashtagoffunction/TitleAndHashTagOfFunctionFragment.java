@@ -45,7 +45,7 @@ public class TitleAndHashTagOfFunctionFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater,
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.title_and_hash_tag_of_function, container, false);
+        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.make_function_title_and_hash_tag_of_function, container, false);
         initUI(rootView);
         initRepos();
         clickSubmitButton();

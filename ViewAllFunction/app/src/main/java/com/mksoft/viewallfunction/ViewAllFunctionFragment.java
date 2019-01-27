@@ -51,7 +51,7 @@ public class ViewAllFunctionFragment extends Fragment {
         initUI(rootView);
         initRepos();
         getAllFunction();//통신
-        //clickAddButton();
+        clickAddButton();
         return rootView;
     }
 
@@ -95,7 +95,7 @@ public class ViewAllFunctionFragment extends Fragment {
             }
         });
     }
-    /*private void clickAddButton(){
+    private void clickAddButton(){
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -108,7 +108,7 @@ public class ViewAllFunctionFragment extends Fragment {
 
     }//메인으로 애드페이지를 띄우라고 요청하는 함수
 
-    */
+
 
 
 }

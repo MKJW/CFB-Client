@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.FrameLayout;
 
+import com.mksoft.mainbutton.CaculateOfFunction.CaculateOfFunctionFragment;
 import com.mksoft.mainbutton.FunctionAddPage.MakeFunctionFragment;
 import com.mksoft.mainbutton.FunctionAddPage.hashtagAndTitle.TitleAndHashTagOfFunctionFragment;
 
@@ -16,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
     MainButtonFragment mainButtonFragment;
     MakeFunctionFragment makeFunctionFragment;
     TitleAndHashTagOfFunctionFragment titleAndHashTagOfFunctionFragment;
+    CaculateOfFunctionFragment caculateOfFunctionFragment;
     InputMethodManager imm;
     FrameLayout mainContainer;
     @Override
@@ -29,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
         mainButtonFragment = new MainButtonFragment();
         makeFunctionFragment = new MakeFunctionFragment();
         titleAndHashTagOfFunctionFragment = new TitleAndHashTagOfFunctionFragment();
-
+        caculateOfFunctionFragment = new CaculateOfFunctionFragment();
         imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
         mainContainer = findViewById(R.id.mainContainer);
         mainContainer.setOnClickListener(new View.OnClickListener() {
@@ -49,9 +51,11 @@ public class MainActivity extends AppCompatActivity {
 
             getSupportFragmentManager().beginTransaction().replace(R.id.mainContainer, makeFunctionFragment).commit();
             //add 페이지
-        }else if(idx == 3){
+        }else if(idx == 3) {
             titleAndHashTagOfFunctionFragment.setArguments(bundle);
             getSupportFragmentManager().beginTransaction().replace(R.id.mainContainer, titleAndHashTagOfFunctionFragment).commit();
+        }else if(idx == 4){
+
         }
     }
 }

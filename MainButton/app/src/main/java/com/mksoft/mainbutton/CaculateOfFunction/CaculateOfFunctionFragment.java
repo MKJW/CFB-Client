@@ -1,4 +1,4 @@
-package com.mksoft.calculateoffunction;
+package com.mksoft.mainbutton.CaculateOfFunction;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.mksoft.mainbutton.R;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -50,7 +52,7 @@ public class CaculateOfFunctionFragment extends Fragment {
     private void initUI(ViewGroup rootView){
 
         getAllIntent();
-        functionTextView = rootView.findViewById(R.id.functionTextView);
+        functionTextView = rootView.findViewById(R.id.functionTitle);
         if(expressionString!=null)
             functionTextView.setText(expressionString);//번들로 함수를 넘겨 받고
         if(titleString != null)
@@ -63,7 +65,7 @@ public class CaculateOfFunctionFragment extends Fragment {
         resultButton = rootView.findViewById(R.id.resultButton);
         bookMarkButton = rootView.findViewById(R.id.bookMarkButton);
         resultVal = rootView.findViewById(R.id.resultVal);
-        functionTitle = rootView.findViewById(R.id.functionTitle);
+        functionTitle = rootView.findViewById(R.id.functionNameTextView);
 
 
         if(valList != null){
