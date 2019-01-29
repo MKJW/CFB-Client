@@ -78,7 +78,6 @@ public class FunctionArrayAdapter extends RecyclerView.Adapter<RecyclerView.View
                 context.startActivity(mainIntent);
             }
         });*/
-        //해쉬테그 불러오기...
     }
 
     @Override

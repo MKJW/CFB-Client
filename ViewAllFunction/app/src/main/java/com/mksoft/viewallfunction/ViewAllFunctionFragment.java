@@ -49,9 +49,10 @@ public class ViewAllFunctionFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.view_all_function, container, false);
         initUI(rootView);
-        initRepos();
-        getAllFunction();//통신
-        clickAddButton();
+        //initRepos();
+        //getAllFunction();//통신
+        //clickAddButton();
+        test();
         return rootView;
     }
 
@@ -95,7 +96,7 @@ public class ViewAllFunctionFragment extends Fragment {
             }
         });
     }
-    private void clickAddButton(){
+    /*private void clickAddButton(){
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -107,8 +108,17 @@ public class ViewAllFunctionFragment extends Fragment {
 
 
     }//메인으로 애드페이지를 띄우라고 요청하는 함수
-
-
+*/
+    private void test(){
+        ArrayList<FunctionArray> tempArrayList = new ArrayList<>();
+        MakeFunctionArray makeTemp = new MakeFunctionArray("x+y", "mk", "#test");
+        makeTemp.parsingInputString();
+        makeTemp.insertFunctionArray();
+        tempArrayList.add(makeTemp.getFunctionArray());
+        functionArrayAdapter = new FunctionArrayAdapter(getContext(), tempArrayList);
+        recyclerView.setAdapter(functionArrayAdapter);
+        Toast.makeText(getContext(), "test", Toast.LENGTH_LONG).show();
+    }
 
 
 }

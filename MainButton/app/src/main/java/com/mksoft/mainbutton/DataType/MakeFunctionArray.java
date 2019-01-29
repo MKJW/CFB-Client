@@ -92,7 +92,7 @@ public class MakeFunctionArray {
         j =0;
         for(String temp : tempHashTag){
             if(temp.length() != 0){
-                hashTagOfEquation[i].setTagName( tempHashTag[j]);
+                hashTagOfEquation[i]= new TagData(tempHashTag[j]);
                 i++;
             }
             j++;

@@ -75,6 +75,7 @@ public class FunctionArrayAdapter extends RecyclerView.Adapter<RecyclerView.View
                 //액티비티 띄우기
                 Intent mainIntent = new Intent(context, CaculateOfFunctionFragment.class);
                 //add bundle to intent
+
                 mainIntent.putExtra("valList", items.get(position).getNameOfVariables());
                 mainIntent.putExtra("title", items.get(position).getTitle());
                 mainIntent.putExtra("expression", items.get(position).getExpression());

@@ -5,6 +5,9 @@ public class TagData {
     double id;
     double equationId;
 
+    public TagData(String tagName){
+        this.tagName = tagName;
+    }
     public String getTagName() {
         return tagName;
     }
