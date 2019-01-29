@@ -2,7 +2,8 @@ package com.mksoft.mainbutton.DataType;
 
 import android.util.Log;
 
-public class MakeFunctionArray {
+
+public class MakeFunctionArray  {
     public boolean isSuccess = false;//함수배열을 만드는데 성공하면 true로 설정
     private String equation;
     private int numOfVariables = 0;

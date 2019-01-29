@@ -1,9 +1,10 @@
 package com.mksoft.titleandhashtagoffunction;
 
 
+import java.io.Serializable;
 import java.util.Arrays;
 
-public class FunctionArray {
+public class FunctionArray  implements Serializable {
     int id = 0;
     private String expression = null;
     Object[] nameOfVariables = null;

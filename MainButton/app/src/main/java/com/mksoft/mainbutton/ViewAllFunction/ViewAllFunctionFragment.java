@@ -93,7 +93,7 @@ public class ViewAllFunctionFragment extends Fragment {
             @Override
             public void onResponse(Call<ArrayList<FunctionArray>> call, Response<ArrayList<FunctionArray>> response) {
                 if(response.isSuccessful() ==true && response.body() != null) {
-                    functionArrayAdapter = new FunctionArrayAdapter(getContext(), response.body());
+                    functionArrayAdapter = new FunctionArrayAdapter(getContext(), response.body(), (MainActivity)getActivity());
                     Log.d("서버응답", response.body().get(0).getHashtags()[0].getTagName());
                     recyclerView.setAdapter(functionArrayAdapter);
 

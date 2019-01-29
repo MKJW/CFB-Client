@@ -55,7 +55,9 @@ public class MainActivity extends AppCompatActivity {
             titleAndHashTagOfFunctionFragment.setArguments(bundle);
             getSupportFragmentManager().beginTransaction().replace(R.id.mainContainer, titleAndHashTagOfFunctionFragment).commit();
         }else if(idx == 4){
-
+            //계산기 화면
+            caculateOfFunctionFragment.setArguments(bundle);
+            getSupportFragmentManager().beginTransaction().replace(R.id.mainContainer, caculateOfFunctionFragment).commit();
         }
     }
 }

@@ -1,6 +1,8 @@
 package com.mksoft.mainbutton.DataType;
 
-public class TagData {
+import java.io.Serializable;
+
+public class TagData implements Serializable {
     String tagName;
     double id;
     double equationId;

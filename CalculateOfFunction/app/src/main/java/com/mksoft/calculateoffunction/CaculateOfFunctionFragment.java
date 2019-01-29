@@ -1,6 +1,5 @@
 package com.mksoft.calculateoffunction;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,15 +16,9 @@ public class CaculateOfFunctionFragment extends Fragment {
     Button resultButton;
     Button bookMarkButton;
     RecyclerView recyclerView;
-    String expressionString;
-    String hashTagString;
-    String titleString;
-
-    Object[] valList;
-    int cntOfVal;
     RecyclerView.LayoutManager mLayoutManager;
 
-
+    FunctionArray functionArray;
     ValListAdapter valListAdapter;
     TextView functionTextView;
     TextView resultVal;
@@ -42,63 +35,65 @@ public class CaculateOfFunctionFragment extends Fragment {
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.caculate_of_function, container, false);
-        //testInit();
         initUI(rootView);
         onClickResultButton();
         return rootView;
     }
     private void initUI(ViewGroup rootView){
 
-        getAllIntent();
-        functionTextView = rootView.findViewById(R.id.functionTextView);
-        if(expressionString!=null)
-            functionTextView.setText(expressionString);//번들로 함수를 넘겨 받고
-        if(titleString != null)
-            functionTitle.setText(titleString);
+        this.getAllArguments();
+
+        functionTextView = rootView.findViewById(R.id.functionTitle);
+        if(functionArray.getTitle() != null)
+            functionTextView.setText(functionArray.getTitle());//번들로 함수를 넘겨 받고
+        functionTitle = rootView.findViewById(R.id.functionTextView);
+        if(functionArray.getExpression() != null)
+            functionTitle.setText(functionArray.getExpression());
         caculateOfFunctionPageHashTagTextView = rootView.findViewById(R.id.caculateOfFunctionPageHashTagTextView);
-        if(hashTagString !=null)
-            caculateOfFunctionPageHashTagTextView.setText(hashTagString);
 
+        if(functionArray.getHashtags() !=null){
+            String tempTag = "";
+            for(int i =0; i<functionArray.getHashtags().length; i++){
+                tempTag += "#"+functionArray.getHashtags()[i].getTagName()+" ";
+            }
+            caculateOfFunctionPageHashTagTextView.setText(tempTag);
+        }
 
-        resultButton = rootView.findViewById(R.id.resultButton);
-        bookMarkButton = rootView.findViewById(R.id.bookMarkButton);
-        resultVal = rootView.findViewById(R.id.resultVal);
-        functionTitle = rootView.findViewById(R.id.functionTitle);
-
-
-        if(valList != null){
+        if(functionArray.getNameOfVariables() != null){
             recyclerView = (RecyclerView)rootView.findViewById(R.id.valListRecyclerView);
             recyclerView.setHasFixedSize(true);
             mLayoutManager = new LinearLayoutManager(rootView.getContext());
             recyclerView.setLayoutManager(mLayoutManager);
-            valListAdapter = new ValListAdapter(rootView.getContext(), valList, valList.length);
+            valListAdapter = new ValListAdapter(rootView.getContext(), functionArray.getNameOfVariables(), functionArray.getNameOfVariables().length);
             recyclerView.setAdapter(valListAdapter);
             //리사이크러뷰 초기화
 
         }
 
-    }
-    private void getAllIntent(){
+        resultButton = rootView.findViewById(R.id.resultButton);
+        bookMarkButton = rootView.findViewById(R.id.bookMarkButton);
+        resultVal = rootView.findViewById(R.id.resultVal);
+        functionTitle = rootView.findViewById(R.id.functionNameTextView);
 
-        Intent intent = getActivity().getIntent();
-        titleString = intent.getExtras().getString("title");
-        expressionString = intent.getExtras().getString("expression");
-        hashTagString = intent.getExtras().getString("tagName");
-        valList = intent.getExtras().getStringArray("valList");
+
+
+    }
+    private void getAllArguments(){
+        this.functionArray = (FunctionArray) getArguments().getSerializable("FunctionArray");
 
     }
     private void onClickResultButton(){
         resultButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String[] userInputVal = new String[cntOfVal];
-                for(int i =0; i<cntOfVal;i++){
+                String[] userInputVal = new String[functionArray.getNameOfVariables().length];
+                for(int i =0; i<functionArray.getNameOfVariables().length;i++){
                     if(valListAdapter.getEditText(i) == null)
                         return;
                     userInputVal[i] = valListAdapter.getEditText(i);
 
                 }
-                CaculateMethod caculateMethod = new CaculateMethod(expressionString, valList,userInputVal, cntOfVal);
+                CaculateMethod caculateMethod = new CaculateMethod(functionArray.getExpression(), functionArray.getNameOfVariables(),userInputVal, functionArray.getNameOfVariables().length);
                 caculateMethod.caculateEquation();//계산수행
                 if(caculateMethod.isResultState())
                     resultVal.setText(String.valueOf(caculateMethod.getResultVal()));

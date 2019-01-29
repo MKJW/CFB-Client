@@ -27,4 +27,5 @@ dependencies {implementation fileTree(dir: 'libs', include: ['*.jar'])
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0-alpha1'
     implementation 'com.squareup.retrofit2:retrofit:2.3.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
+    implementation 'io.apisense:rhino-android:1.0'
 }

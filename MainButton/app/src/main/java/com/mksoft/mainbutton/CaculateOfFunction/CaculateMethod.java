@@ -14,7 +14,7 @@ public class CaculateMethod {
     private Double resultVal;
     private boolean resultState = false;
 
-    public CaculateMethod(String equation,Object[] valListname, String[] valListString, int numOfVariables) {
+    public CaculateMethod(String equation, Object[] valListname, String[] valListString, int numOfVariables) {
         this.equation = equation;
         this.valListname = valListname;
         this.valListString = valListString;

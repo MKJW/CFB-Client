@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
+import org.mozilla.javascript.tools.jsc.Main;
+
 import java.util.ArrayList;
 
 import androidx.annotation.Nullable;
@@ -82,7 +84,7 @@ public class ViewAllFunctionFragment extends Fragment {
             @Override
             public void onResponse(Call<ArrayList<FunctionArray>> call, Response<ArrayList<FunctionArray>> response) {
                 if(response.isSuccessful() ==true && response.body() != null) {
-                    functionArrayAdapter = new FunctionArrayAdapter(getContext(), response.body());
+                    functionArrayAdapter = new FunctionArrayAdapter(getContext(), response.body(),  (MainActivity) getActivity());
                     Log.d("서버응답", response.body().get(0).getHashtags()[0].getTagName());
                     recyclerView.setAdapter(functionArrayAdapter);
 
@@ -115,9 +117,9 @@ public class ViewAllFunctionFragment extends Fragment {
         makeTemp.parsingInputString();
         makeTemp.insertFunctionArray();
         tempArrayList.add(makeTemp.getFunctionArray());
-        functionArrayAdapter = new FunctionArrayAdapter(getContext(), tempArrayList);
+        functionArrayAdapter = new FunctionArrayAdapter(getContext(), tempArrayList, (MainActivity)getActivity());
         recyclerView.setAdapter(functionArrayAdapter);
-        Toast.makeText(getContext(), "test", Toast.LENGTH_LONG).show();
+
     }
 
 

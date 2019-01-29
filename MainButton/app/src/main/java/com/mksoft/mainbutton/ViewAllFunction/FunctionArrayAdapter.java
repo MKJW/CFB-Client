@@ -1,16 +1,15 @@
 package com.mksoft.mainbutton.ViewAllFunction;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.mksoft.mainbutton.CaculateOfFunction.CaculateOfFunctionFragment;
 import com.mksoft.mainbutton.DataType.FunctionArray;
 import com.mksoft.mainbutton.DataType.TagData;
+import com.mksoft.mainbutton.MainActivity;
 import com.mksoft.mainbutton.R;
 
 import java.util.ArrayList;
@@ -35,9 +34,11 @@ public class FunctionArrayAdapter extends RecyclerView.Adapter<RecyclerView.View
     }
     ArrayList<FunctionArray> items;
     Context context;
-    public FunctionArrayAdapter(Context context, ArrayList<FunctionArray> items){
+    MainActivity mainActivity;
+    public FunctionArrayAdapter(Context context, ArrayList<FunctionArray> items, MainActivity mainActivity){
         this.context = context;
         this.items = items;
+        this.mainActivity = mainActivity;
     }
 
 
@@ -49,7 +50,7 @@ public class FunctionArrayAdapter extends RecyclerView.Adapter<RecyclerView.View
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, final int position) {
         final MyViewHolder myViewHolder = (MyViewHolder) holder;
         myViewHolder.functionTextView.setText(items.get(position).getExpression());
         myViewHolder.functionNameTextView.setText(items.get(position).getTitle());
@@ -67,24 +68,17 @@ public class FunctionArrayAdapter extends RecyclerView.Adapter<RecyclerView.View
             }
             myViewHolder.hashTagTextView.setText(tempHash);
         }
-        final String finalTempHash = tempHash;
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 //액티비티 띄우기
-                Intent mainIntent = new Intent(context, CaculateOfFunctionFragment.class);
-                //add bundle to intent
+                //프래그먼트를 받자. 그리고 그거 받고 처리해주자...
+                Bundle args = new Bundle();
+                args.putSerializable("FunctionArray", items.get(position));
+                mainActivity.onFragmentChange(4, args);
 
-                mainIntent.putExtra("valList", items.get(position).getNameOfVariables());
-                mainIntent.putExtra("title", items.get(position).getTitle());
-                mainIntent.putExtra("expression", items.get(position).getExpression());
-                mainIntent.putExtra("tagName", finalTempHash);
-                //start activity
-                context.startActivity(mainIntent);
             }
         });
-        //해쉬테그 불러오기...
     }
 
     @Override
