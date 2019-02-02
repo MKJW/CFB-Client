@@ -4,8 +4,7 @@ import java.io.Serializable;
 
 public class TagData implements Serializable {
     String tagName;
-    double id;
-    double equationId;
+
 
     public TagData(String tagName){
         this.tagName = tagName;
@@ -22,8 +21,7 @@ public class TagData implements Serializable {
     public String toString() {
         return "TagData{" +
                 "tagName='" + tagName + '\'' +
-                ", id=" + id +
-                ", equationId=" + equationId +
+
                 '}';
     }
 }

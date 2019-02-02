@@ -69,9 +69,20 @@ public class MakeFunctionArray  {
                 this.numOfVariables++;
             }
         }
-        nameOfVariables = new String[numOfVariables];
+
         int i =0;
         int j =0;
+        for(String temp : tempValue){
+            if(temp.length() != 0){
+
+                i++;
+            }
+
+
+        }
+        nameOfVariables = new String[i];
+        i =0;
+        j =0;
         for(String temp : tempValue){
             if(temp.length() != 0){
                 nameOfVariables[i] = tempValue[j];
@@ -88,7 +99,16 @@ public class MakeFunctionArray  {
                 this.numOfHashTag++;
             }
         }
-        hashTagOfEquation = new TagData[numOfHashTag];
+
+        i =0;
+        j =0;
+        for(String temp : tempHashTag){
+            if(temp.length() != 0){
+
+                i++;
+            }
+        }
+        hashTagOfEquation = new TagData[i];
         i =0;
         j =0;
         for(String temp : tempHashTag){

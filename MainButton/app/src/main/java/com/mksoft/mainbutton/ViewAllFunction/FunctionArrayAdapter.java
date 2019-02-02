@@ -54,19 +54,22 @@ public class FunctionArrayAdapter extends RecyclerView.Adapter<RecyclerView.View
         final MyViewHolder myViewHolder = (MyViewHolder) holder;
         myViewHolder.functionTextView.setText(items.get(position).getExpression());
         myViewHolder.functionNameTextView.setText(items.get(position).getTitle());
-        TagData[] tagData =  items.get(position).getHashtags();
-        String tempHash = "";
-        if(tagData.length<4){
+        if( items.get(position).getHashtags()!= null){
+            TagData[] tagData =  items.get(position).getHashtags();
+            String tempHash = "";
+            if(tagData.length<4){
 
-            for(int i =0;i<tagData.length; i++){
-                tempHash += "#"+tagData[i].getTagName()+" ";
+                for(int i =0;i<tagData.length; i++){
+                    tempHash += "#"+tagData[i].getTagName()+" ";
+                }
+                myViewHolder.hashTagTextView.setText(tempHash);
+            }else{
+                for(int i =0; i<3;i++){
+                    tempHash += tagData[i].getTagName()+" ";
+                }
+                myViewHolder.hashTagTextView.setText(tempHash);
             }
-            myViewHolder.hashTagTextView.setText(tempHash);
-        }else{
-            for(int i =0; i<3;i++){
-                tempHash += tagData[i].getTagName()+" ";
-            }
-            myViewHolder.hashTagTextView.setText(tempHash);
+
         }
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

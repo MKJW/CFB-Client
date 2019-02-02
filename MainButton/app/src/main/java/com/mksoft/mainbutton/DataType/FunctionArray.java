@@ -9,14 +9,15 @@ public class FunctionArray  implements Serializable {
     private String expression = null;
     Object[] nameOfVariables = null;
     String title = null;
-    TagData[] hashtags = null;
+    TagData[] hashTags = null;
+
 
     public FunctionArray(String equation, Object[] nameOfVariables, String nameOfEquation, TagData[] hashOfEquation) {
 
         this.expression = equation;
         this.nameOfVariables = nameOfVariables;
         this.title = nameOfEquation;
-        this.hashtags =  hashOfEquation;
+        this.hashTags =  hashOfEquation;
 
     }
 
@@ -42,7 +43,7 @@ public class FunctionArray  implements Serializable {
                 ", expression='" + expression + '\'' +
                 ", nameOfVariables=" + Arrays.toString(nameOfVariables) +
                 ", title='" + title + '\'' +
-                ", hashTags=" + Arrays.toString(hashtags) +
+                ", hashTags=" + Arrays.toString(hashTags) +
                 '}';
     }
 
@@ -61,7 +62,7 @@ public class FunctionArray  implements Serializable {
 
 
     public TagData[] getHashtags() {
-        return hashtags;
+        return hashTags;
     }
 
     public void setId(int id) {
@@ -78,7 +79,7 @@ public class FunctionArray  implements Serializable {
 
 
     public void setHashtags(Object[] hashTags) {
-        this.hashtags = (TagData[])hashTags;
+        this.hashTags = (TagData[])hashTags;
     }
 
     public String getTitle() {

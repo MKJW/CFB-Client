@@ -1,5 +1,6 @@
 package com.mksoft.mainbutton;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,7 +20,7 @@ public class MainButtonFragment extends Fragment {
     Button optionButton;
 
     FrameLayout contentFrameLayout;
-
+    MainActivity mainActivity;
     ViewAllFunctionFragment viewAllFunctionFragment;
 
     @Override
@@ -28,7 +29,11 @@ public class MainButtonFragment extends Fragment {
 
 
     }
-
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mainActivity = (MainActivity)getActivity();
+    }
     @Override
     public View onCreateView(LayoutInflater inflater,
                              @Nullable ViewGroup container,
@@ -36,7 +41,7 @@ public class MainButtonFragment extends Fragment {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.main_button, container, false);
         initFragment();
         initUI(rootView);
-
+        hideKeyboard();
         return rootView;
     }
     private void initFragment(){
@@ -52,5 +57,8 @@ public class MainButtonFragment extends Fragment {
         //기본 화면 초기화...
     }
 
+    private void hideKeyboard(){
+        mainActivity.getHideKeyboard().hideKeyboard();
+    }
 
 }

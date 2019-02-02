@@ -1,15 +1,20 @@
 package com.mksoft.mainbutton.CaculateOfFunction;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.mksoft.mainbutton.DataType.FunctionArray;
+import com.mksoft.mainbutton.MainActivity;
 import com.mksoft.mainbutton.R;
+
+import org.mozilla.javascript.tools.jsc.Main;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -19,8 +24,12 @@ import androidx.recyclerview.widget.RecyclerView;
 public class CaculateOfFunctionFragment extends Fragment {
     Button resultButton;
     Button bookMarkButton;
+    Button backButton;
     RecyclerView recyclerView;
     RecyclerView.LayoutManager mLayoutManager;
+
+
+    MainActivity mainActivity;
 
     FunctionArray functionArray;
     ValListAdapter valListAdapter;
@@ -33,7 +42,11 @@ public class CaculateOfFunctionFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
     }
-
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mainActivity = (MainActivity)getActivity();
+    }
     @Override
     public View onCreateView(LayoutInflater inflater,
                              @Nullable ViewGroup container,
@@ -41,6 +54,8 @@ public class CaculateOfFunctionFragment extends Fragment {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.caculate_of_function, container, false);
         initUI(rootView);
         onClickResultButton();
+        onClickBackButton();
+        hideKeyboard();
         return rootView;
     }
     private void initUI(ViewGroup rootView){
@@ -78,7 +93,7 @@ public class CaculateOfFunctionFragment extends Fragment {
         bookMarkButton = rootView.findViewById(R.id.bookMarkButton);
         resultVal = rootView.findViewById(R.id.resultVal);
         functionTitle = rootView.findViewById(R.id.functionNameTextView);
-
+        backButton = rootView.findViewById(R.id.caculateOfFunctionBackButton);
 
 
     }
@@ -103,6 +118,18 @@ public class CaculateOfFunctionFragment extends Fragment {
                     resultVal.setText(String.valueOf(caculateMethod.getResultVal()));
             }
         });
+    }
+    private void onClickBackButton(){
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mainActivity.onFragmentChange(1, null);//메인버튼페이지로 돌아감
+
+            }
+        });
+    }
+    private void hideKeyboard(){
+        mainActivity.getHideKeyboard().hideKeyboard();
     }
     /*private void testInit(){
             equation = "";

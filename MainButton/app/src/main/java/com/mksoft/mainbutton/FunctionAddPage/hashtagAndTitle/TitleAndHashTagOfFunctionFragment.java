@@ -2,6 +2,7 @@ package com.mksoft.mainbutton.FunctionAddPage.hashtagAndTitle;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import android.widget.Toast;
 
 import com.mksoft.mainbutton.DataType.FunctionArray;
 import com.mksoft.mainbutton.DataType.MakeFunctionArray;
+import com.mksoft.mainbutton.HideKeyboard;
 import com.mksoft.mainbutton.MainActivity;
 import com.mksoft.mainbutton.R;
 import com.mksoft.mainbutton.WebService;
@@ -56,6 +58,7 @@ public class TitleAndHashTagOfFunctionFragment extends Fragment {
         initRepos();
         clickSubmitButton();
         clickBackButton();
+        hideKeyboard();
         //test();
         return rootView;
     }
@@ -70,8 +73,11 @@ public class TitleAndHashTagOfFunctionFragment extends Fragment {
     }
 
     private void getAllArguments(){
-        expressionString = getArguments().getString("expression");
-        userFunctionTextView.setText(expressionString);
+        if(getArguments() != null){
+            expressionString = getArguments().getString("expression");
+            userFunctionTextView.setText(expressionString);
+        }
+
     }
     private void initRepos(){
         retrofit = new Retrofit.Builder().baseUrl("http://114.202.9.170:8080").addConverterFactory(GsonConverterFactory.create()).build();
@@ -82,7 +88,9 @@ public class TitleAndHashTagOfFunctionFragment extends Fragment {
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mainActivity.onFragmentChange(2, null);
+                Bundle bundle = new Bundle(1);
+                bundle.putString("expression",expressionString);
+                mainActivity.onFragmentChange(2, bundle);
             }
         });
     }
@@ -97,6 +105,7 @@ public class TitleAndHashTagOfFunctionFragment extends Fragment {
                 makeFunctionArray.parsingInputString();
                 makeFunctionArray.insertFunctionArray();
                 if(makeFunctionArray.isSuccess == true){
+                    //Toast.makeText(getContext(), makeFunctionArray.getFunctionArray().toString(), Toast.LENGTH_LONG).show();
                     postFunction(makeFunctionArray.getFunctionArray());
                 }
 
@@ -108,13 +117,30 @@ public class TitleAndHashTagOfFunctionFragment extends Fragment {
         call.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
-                Toast.makeText(getActivity().getApplicationContext(), "success", Toast.LENGTH_SHORT).show();
+                if(response.isSuccessful()==true && response.body() != null){
+                    if(response.body() == "false"){
+
+                        Toast.makeText(mainActivity, "이미 등록된 이름입니다.", Toast.LENGTH_SHORT).show();
+                    }else{
+                        Toast.makeText(mainActivity, "저장성공", Toast.LENGTH_SHORT).show();
+                        backButton.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                hashTagOfEquationEditText.setText("");
+                                nameOfEquationEditText.setText("");
+                                mainActivity.onFragmentChange(1, null);//메인버튼페이지로 돌아감
+
+                            }
+                        });
+                    }
+                }
+
             }//중복 확인 결과 받아서 처리해주자...
 
             @Override
             public void onFailure(Call<String> call, Throwable t) {
-
-                Toast.makeText(getActivity().getApplicationContext(), "fail", Toast.LENGTH_SHORT).show();
+                Log.d("server test", t.toString());
+                Toast.makeText(getActivity().getApplicationContext(), t.toString(), Toast.LENGTH_LONG).show();
             }
 
         });
@@ -139,5 +165,9 @@ public class TitleAndHashTagOfFunctionFragment extends Fragment {
         postFunction(makeFunctionArray3.getFunctionArray());
         postFunction(makeFunctionArray4.getFunctionArray());
 
+    }
+
+    private void hideKeyboard(){
+        mainActivity.getHideKeyboard().hideKeyboard();
     }
 }

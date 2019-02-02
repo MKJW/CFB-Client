@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
     MakeFunctionFragment makeFunctionFragment;
     TitleAndHashTagOfFunctionFragment titleAndHashTagOfFunctionFragment;
     CaculateOfFunctionFragment caculateOfFunctionFragment;
-    InputMethodManager imm;
+    HideKeyboard hideKeyboard;
     FrameLayout mainContainer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,14 +32,8 @@ public class MainActivity extends AppCompatActivity {
         makeFunctionFragment = new MakeFunctionFragment();
         titleAndHashTagOfFunctionFragment = new TitleAndHashTagOfFunctionFragment();
         caculateOfFunctionFragment = new CaculateOfFunctionFragment();
-        imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+        hideKeyboard = new HideKeyboard(this);
         mainContainer = findViewById(R.id.mainContainer);
-        mainContainer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),0);
-            }
-        });//클릭시 키보드 숨기기
         getSupportFragmentManager().beginTransaction().replace(R.id.mainContainer, mainButtonFragment).commit();//처음 기본 플레그먼트 설정
     }
     public void onFragmentChange(int idx, Bundle bundle){
@@ -48,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
             getSupportFragmentManager().beginTransaction().replace(R.id.mainContainer, mainButtonFragment).commit();
             //메인버튼 프레그먼트
         }else if(idx == 2){
-
+            makeFunctionFragment.setArguments(bundle);
             getSupportFragmentManager().beginTransaction().replace(R.id.mainContainer, makeFunctionFragment).commit();
             //add 페이지
         }else if(idx == 3) {
@@ -59,5 +53,8 @@ public class MainActivity extends AppCompatActivity {
             caculateOfFunctionFragment.setArguments(bundle);
             getSupportFragmentManager().beginTransaction().replace(R.id.mainContainer, caculateOfFunctionFragment).commit();
         }
+    }
+    public HideKeyboard getHideKeyboard(){
+        return hideKeyboard;
     }
 }
