@@ -1,12 +1,15 @@
-package com.mksoft.mainbutton;
+package com.mksoft.mainbutton.Repository;
 
 
 import com.mksoft.mainbutton.DataType.FunctionArray;
 
 import java.util.ArrayList;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
@@ -23,5 +26,12 @@ public interface WebService {
 
     @POST("/save")
     Call<String> postFunction(@Body FunctionArray functionArray);
+
+    @FormUrlEncoded
+    @POST("/login")
+    Call<ResponseBody> insertUser(
+            @Field("user") String user,
+            @Field("password") String password);
+
 
 }

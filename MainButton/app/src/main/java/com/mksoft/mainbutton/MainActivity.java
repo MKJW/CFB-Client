@@ -7,10 +7,15 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.FrameLayout;
 
 import com.mksoft.mainbutton.CaculateOfFunction.CaculateOfFunctionFragment;
+import com.mksoft.mainbutton.DI.CFBServiceComponent;
+import com.mksoft.mainbutton.DI.CFBServiceModule;
+
+import com.mksoft.mainbutton.DI.DaggerCFBServiceComponent;
 import com.mksoft.mainbutton.FunctionAddPage.MakeFunctionFragment;
 import com.mksoft.mainbutton.FunctionAddPage.hashtagAndTitle.TitleAndHashTagOfFunctionFragment;
 
 import androidx.appcompat.app.AppCompatActivity;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -20,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     CaculateOfFunctionFragment caculateOfFunctionFragment;
     HideKeyboard hideKeyboard;
     FrameLayout mainContainer;
+    CFBServiceComponent cfbServiceComponent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
         titleAndHashTagOfFunctionFragment = new TitleAndHashTagOfFunctionFragment();
         caculateOfFunctionFragment = new CaculateOfFunctionFragment();
         hideKeyboard = new HideKeyboard(this);
+        cfbServiceComponent = DaggerCFBServiceComponent.create();
         mainContainer = findViewById(R.id.mainContainer);
         getSupportFragmentManager().beginTransaction().replace(R.id.mainContainer, mainButtonFragment).commit();//처음 기본 플레그먼트 설정
     }
@@ -56,5 +63,9 @@ public class MainActivity extends AppCompatActivity {
     }
     public HideKeyboard getHideKeyboard(){
         return hideKeyboard;
+    }
+
+    public CFBServiceComponent getCfbServiceComponent() {
+        return cfbServiceComponent;
     }
 }

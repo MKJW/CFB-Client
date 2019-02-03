@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,6 +38,7 @@ public class CaculateOfFunctionFragment extends Fragment {
     TextView resultVal;
     TextView caculateOfFunctionPageHashTagTextView;
     TextView functionTitle;
+    RelativeLayout caculateOfFunctionRelativeLayout;
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -56,6 +58,7 @@ public class CaculateOfFunctionFragment extends Fragment {
         onClickResultButton();
         onClickBackButton();
         hideKeyboard();
+        clickHideKeyboard();
         return rootView;
     }
     private void initUI(ViewGroup rootView){
@@ -94,7 +97,7 @@ public class CaculateOfFunctionFragment extends Fragment {
         resultVal = rootView.findViewById(R.id.resultVal);
         functionTitle = rootView.findViewById(R.id.functionNameTextView);
         backButton = rootView.findViewById(R.id.caculateOfFunctionBackButton);
-
+        caculateOfFunctionRelativeLayout = rootView.findViewById(R.id.caculateOfFunctionRelativeLayout);
 
     }
     private void getAllArguments(){
@@ -138,6 +141,14 @@ public class CaculateOfFunctionFragment extends Fragment {
             cntOfVal = 3;
     }//인턴테로 받을꺼...
     */
+    private void clickHideKeyboard(){
+        caculateOfFunctionRelativeLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                hideKeyboard();
 
+            }
+        });
+    }
 
 }

@@ -9,19 +9,12 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.google.gson.JsonParser;
 import com.mksoft.mainbutton.DataType.FunctionArray;
-import com.mksoft.mainbutton.DataType.TagData;
 import com.mksoft.mainbutton.MainActivity;
 import com.mksoft.mainbutton.R;
-import com.mksoft.mainbutton.WebService;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.mksoft.mainbutton.Repository.WebService;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -36,8 +29,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ViewAllFunctionFragment extends Fragment {
     RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
-    Retrofit retrofit;
-    WebService functionWebService;
     FunctionArrayAdapter functionArrayAdapter;
     Button sortButton;
     Button addButton;
@@ -61,8 +52,7 @@ public class ViewAllFunctionFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.view_all_function, container, false);
         initUI(rootView);
-        initRepos();
-        getAllFunction();//통신
+        mainActivity.getCfbServiceComponent().makeCFBService().getAllFunction(getContext(), getActivity(), recyclerView);
         clickAddButton();
         return rootView;
     }
@@ -79,33 +69,7 @@ public class ViewAllFunctionFragment extends Fragment {
     }
 
 
-    private void initRepos(){
-        retrofit = new Retrofit.Builder().baseUrl("http://114.202.9.170:8080").addConverterFactory(GsonConverterFactory.create()).build();
-        functionWebService = retrofit.create(WebService.class);
-    }
-    //데거를 이용하여 한번만 선언하여 사용하자
 
-    public void getAllFunction() {
-        Call<ArrayList<FunctionArray>> call = functionWebService.getAllFunction();
-
-        call.enqueue(new Callback<ArrayList<FunctionArray>>(){
-
-            @Override
-            public void onResponse(Call<ArrayList<FunctionArray>> call, Response<ArrayList<FunctionArray>> response) {
-                if(response.isSuccessful() ==true && response.body() != null) {
-                    functionArrayAdapter = new FunctionArrayAdapter(getContext(), response.body(), (MainActivity)getActivity());
-                    recyclerView.setAdapter(functionArrayAdapter);
-
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ArrayList<FunctionArray>> call, Throwable t) {
-                Toast.makeText(getContext().getApplicationContext(), t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
-                Log.d("testResult", t.getLocalizedMessage());
-            }
-        });
-    }
     private void clickAddButton(){
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
