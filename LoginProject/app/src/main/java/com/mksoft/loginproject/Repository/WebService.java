@@ -28,11 +28,5 @@ public interface WebService {
     @POST("/save")
     Call<String> postFunction(@Body FunctionArray functionArray);
 
-    @FormUrlEncoded
-    @POST("/login")
-    Call<ResponseBody> insertUser(
-            @Field("user") String user,
-            @Field("password") String password);
-
 
 }
