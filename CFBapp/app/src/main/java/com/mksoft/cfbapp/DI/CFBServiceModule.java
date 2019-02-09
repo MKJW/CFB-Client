@@ -1,7 +1,7 @@
 package com.mksoft.cfbapp.DI;
 
 
-import com.mksoft.cfbapp.Repository.API.WebService;
+import com.mksoft.cfbapp.Repository.API.CFBService;
 
 import dagger.Module;
 import dagger.Provides;
@@ -12,10 +12,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class CFBServiceModule {
 
     @Provides
-    WebService provideWebService(){
+    CFBService provideWebService(){
         return new Retrofit.Builder()
                 .baseUrl("http://114.202.9.170:8080")
                 .addConverterFactory(GsonConverterFactory.create())
-                .build().create(WebService.class);
+                .build().create(CFBService.class);
     }
 }

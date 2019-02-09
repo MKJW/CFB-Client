@@ -1,6 +1,6 @@
 package com.mksoft.cfbapp.DI;
 
-import com.mksoft.cfbapp.Repository.LoginService;
+import com.mksoft.cfbapp.Repository.OauthServiceClass;
 
 import javax.inject.Singleton;
 
@@ -10,5 +10,5 @@ import dagger.Component;
 @Component(modules = LoginServiceModule.class)
 
 public interface LoginServiceComponent {
-    LoginService makeLoginService();
+    OauthServiceClass makeLoginService();
 }

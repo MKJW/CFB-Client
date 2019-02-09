@@ -1,6 +1,6 @@
 package com.mksoft.loginproject.DI;
 
-import com.mksoft.loginproject.Repository.LoginService;
+import com.mksoft.loginproject.Repository.OauthServiceClass;
 
 import javax.inject.Singleton;
 
@@ -10,5 +10,5 @@ import dagger.Component;
 @Component(modules = LoginServiceModule.class)
 
 public interface LoginServiceComponent {
-    LoginService makeLoginService();
+    OauthServiceClass makeLoginService();
 }

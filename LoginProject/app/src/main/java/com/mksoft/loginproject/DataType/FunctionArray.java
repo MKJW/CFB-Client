@@ -4,7 +4,7 @@ package com.mksoft.loginproject.DataType;
 import java.io.Serializable;
 import java.util.Arrays;
 
-public class FunctionArray implements Serializable {
+public class FunctionArray  implements Serializable {
     int id = 0;
     private String expression = null;
     Object[] nameOfVariables = null;

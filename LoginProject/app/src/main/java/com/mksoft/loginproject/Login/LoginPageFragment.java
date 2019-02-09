@@ -8,15 +8,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
+
 
 import com.mksoft.loginproject.MainActivity;
 import com.mksoft.loginproject.R;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 public class LoginPageFragment extends Fragment {
 
@@ -25,6 +23,7 @@ public class LoginPageFragment extends Fragment {
     EditText loginProjectLoginPageIdEditText;
     EditText loginProjectLoginPagePwEditText;
     Button loginProjectLoginPageLoginButton;
+    Button loginProjectLoginPageJoinButton;
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -44,6 +43,7 @@ public class LoginPageFragment extends Fragment {
         hideKeyboard();
         clickHideKeyboard();
         clickLoginButton();
+        clickJoinButton();
         return rootView;
     }
     private void initUI(ViewGroup rootView){
@@ -51,6 +51,7 @@ public class LoginPageFragment extends Fragment {
         loginProjectLoginPageIdEditText = rootView.findViewById(R.id.loginProjectLoginPageIdEditText);
         loginProjectLoginPagePwEditText = rootView.findViewById(R.id.loginProjectLoginPagePwEditText);
         loginProjectLoginPageLoginButton = rootView.findViewById(R.id.loginProjectLoginPageLoginButton);
+        loginProjectLoginPageJoinButton = rootView.findViewById(R.id.loginProjectLoginPageJoinButton);
     }
     private void hideKeyboard(){
         mainActivity.getHideKeyboard().hideKeyboard();
@@ -73,9 +74,19 @@ public class LoginPageFragment extends Fragment {
                     mainActivity.getLoginServiceComponent().makeLoginService().getToken(getContext(),
                             loginProjectLoginPagePwEditText.getText().toString(),
                             loginProjectLoginPageIdEditText.getText().toString(),
-                            loginProjectLoginPagePwEditText.getText().toString());
+                            loginProjectLoginPagePwEditText.getText().toString(),
+                            mainActivity
+                            );
 
                 }
+            }
+        });
+    }
+    private void clickJoinButton(){
+        loginProjectLoginPageJoinButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mainActivity.onFragmentChange(5, null);
             }
         });
     }

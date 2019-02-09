@@ -13,7 +13,7 @@ import android.widget.Toast;
 
 import com.mksoft.cfbapp.MainActivity;
 import com.mksoft.cfbapp.R;
-import com.mksoft.cfbapp.Repository.API.WebService;
+import com.mksoft.cfbapp.Repository.API.CFBService;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -26,7 +26,7 @@ public class MakeFunctionFragment extends Fragment {
     Button backButton;
     EditText editFunctionText;
     Retrofit retrofit;
-    WebService functionWebService;
+    CFBService functionCFBService;
     MainActivity mainActivity;//메인엑티비티에서 요청을 하기위하여 필요.
     String expression;
     RelativeLayout makeFunctionMainRalativeLayout;
@@ -77,7 +77,7 @@ public class MakeFunctionFragment extends Fragment {
 
     private void initRepos(){
         retrofit = new Retrofit.Builder().baseUrl("http://114.202.9.170:8080").addConverterFactory(GsonConverterFactory.create()).build();
-        functionWebService = retrofit.create(WebService.class);
+        functionCFBService = retrofit.create(CFBService.class);
     }
 
     private void clickNextButton(){
