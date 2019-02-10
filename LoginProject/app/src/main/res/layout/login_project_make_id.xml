@@ -40,7 +40,6 @@
             android:id="@+id/loginProjectMakeIdIDstate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="상태표시... 아이디 가능한지..."
             android:textColor="#83f162"
             android:textSize="10dp"
             android:textStyle="bold" />
@@ -79,13 +78,13 @@
             android:ems="10"
             android:inputType="textPassword"
             android:hint="비밀번호 확인"/>
+
         <TextView
             android:id="@+id/loginProjectMakeIdPWstate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="상태표시... 비번 가능한지..."
             android:textSize="10dp"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
     </LinearLayout>
 
     <LinearLayout
@@ -111,13 +110,13 @@
             android:ems="10"
             android:hint="email"
             android:inputType="textPersonName" />
+
         <TextView
             android:id="@+id/loginProjectMakeIdEmailstate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="상태표시... 이메일 가능한지..."
             android:textSize="10dp"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
     </LinearLayout>
 
     <Button

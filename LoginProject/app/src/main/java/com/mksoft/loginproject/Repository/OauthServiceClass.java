@@ -33,7 +33,7 @@ public class OauthServiceClass {
                     Log.d("testLogin", response.body().toString());
                     SharedPreferences pref = context.getSharedPreferences("pref", Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = pref.edit();
-                    editor.putString("access_token", "Bearer {"+response.body().getAccess_token()+"}");
+                    editor.putString("access_token", "Bearer "+response.body().getAccess_token());
                     editor.commit();
                     mainActivity.tokenInit();
                     mainActivity.onFragmentChange(1, null);//메인버튼페이지로 돌아감

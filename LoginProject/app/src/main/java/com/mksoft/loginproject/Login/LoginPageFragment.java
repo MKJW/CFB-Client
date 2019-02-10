@@ -86,7 +86,7 @@ public class LoginPageFragment extends Fragment {
         loginProjectLoginPageJoinButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mainActivity.onFragmentChange(5, null);
+                mainActivity.onFragmentChange(6, null);
             }
         });
     }

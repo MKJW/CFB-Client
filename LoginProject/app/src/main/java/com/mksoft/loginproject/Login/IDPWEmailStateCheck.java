@@ -1,5 +1,7 @@
 package com.mksoft.loginproject.Login;
 
+import android.util.Log;
+
 public class IDPWEmailStateCheck {
     private boolean pwState = false;
     private boolean idState = false;
@@ -43,7 +45,9 @@ public class IDPWEmailStateCheck {
         }else if(!(pwSpeciaCharlState == true && pwNumCharlState == true && pwAZCharState == true)){
             pwState = false;
             return "비밀번호에 숫자, 특수문자, 알파벳을 포함시키세요.";
-        }else if(pw1 != pw2){
+        }else if(pw1.equals(pw2) == false){
+            Log.d("test pw", pw1 + "    " + pw2);
+            Log.d("test pw", String.valueOf(pw1.equals(pw2)));
             pwState = false;
             return"비밀번호가 일치하지 않습니다.";
         }

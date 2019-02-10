@@ -1,6 +1,7 @@
 package com.mksoft.loginproject.Login;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.mksoft.loginproject.MainActivity;
 import com.mksoft.loginproject.R;
@@ -50,12 +52,13 @@ public class JoinPageFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater,
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.login_project_login_page, container, false);
+        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.login_project_make_id, container, false);
         initUI(rootView);
         hideKeyboard();
         clickHideKeyboard();
         clickBack();
         clickJoin();
+        focusEditView();
         return rootView;
     }
 
@@ -95,19 +98,29 @@ public class JoinPageFragment extends Fragment {
         if(tempID!=null&&tempID.length() != 0){
             loginProjectMakeIdIDstate.setText(idpwEmailStateCheck.checkID(tempID));
             if(idpwEmailStateCheck.isIdState()){
-                //loginProjectMakeIdIDstate.setTextColor(#83f162);
+                loginProjectMakeIdIDstate.setTextColor(Color.parseColor("#83f162"));
             }else{
-
+                loginProjectMakeIdIDstate.setTextColor(Color.parseColor("#FFF35757"));
             }
         }
         String tempPW1 = loginProjectMakeIdPWEditText.getText().toString();
         String tempPW2 = loginProjectMakeIdPWCheckEditText.getText().toString();
-        if((tempPW1!=null&&tempPW1.length()!=0) && (tempPW2!=null&&tempPW2.length()!=0)){
-
+        if((tempPW1!=null&&tempPW1.length()!=0) && (tempPW2!=null&&tempPW2.length()!=0) ){
+            loginProjectMakeIdPWstate.setText(idpwEmailStateCheck.checkPW(tempPW1, tempPW2));
+            if(idpwEmailStateCheck.isPwState()){
+                loginProjectMakeIdPWstate.setTextColor(Color.parseColor("#83f162"));
+            }else{
+                loginProjectMakeIdPWstate.setTextColor(Color.parseColor("#FFF35757"));
+            }
         }
         String tempEmail = loginProjectMakeIdEmailEditText.getText().toString();
         if(tempEmail != null && tempEmail.length() != 0){
-
+            loginProjectMakeIdEmailstate.setText(idpwEmailStateCheck.checkEmail(tempEmail));
+            if(idpwEmailStateCheck.isEmailState()){
+                loginProjectMakeIdEmailstate.setTextColor(Color.parseColor("#83f162"));
+            }else{
+                loginProjectMakeIdEmailstate.setTextColor(Color.parseColor("#FFF35757"));
+            }
         }
     }
     private void clickJoin(){
@@ -129,6 +142,26 @@ public class JoinPageFragment extends Fragment {
             }
         });
 
+    }
+    private void focusEditView(){
+        loginProjectMakeIdIDEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                checkState();
+            }
+        });
+        loginProjectMakeIdPWEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                checkState();
+            }
+        });
+        loginProjectMakeIdEmailEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                checkState();
+            }
+        });
     }
 
 }
