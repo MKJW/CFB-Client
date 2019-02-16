@@ -13,6 +13,7 @@ import com.mksoft.cfbapp.DI.DaggerLoginServiceComponent;
 import com.mksoft.cfbapp.DI.LoginServiceComponent;
 import com.mksoft.cfbapp.FunctionAddPage.HashTagAndTitle.TitleAndHashTagOfFunctionFragment;
 import com.mksoft.cfbapp.FunctionAddPage.MakeFunctionFragment;
+import com.mksoft.cfbapp.Login.JoinPageFragment;
 import com.mksoft.cfbapp.Login.LoginPageFragment;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     HideKeyboard hideKeyboard;
     FrameLayout mainContainer;
     CFBServiceComponent cfbServiceComponent;
+    JoinPageFragment joinPageFragment;
 
 
     LoginPageFragment loginFragment;
@@ -43,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void init(){
         tokenInit();
+        joinPageFragment = new JoinPageFragment();
         mainButtonFragment = new MainButtonFragment();
         makeFunctionFragment = new MakeFunctionFragment();
         titleAndHashTagOfFunctionFragment = new TitleAndHashTagOfFunctionFragment();
@@ -76,6 +79,9 @@ public class MainActivity extends AppCompatActivity {
             access_token ="";
             getSupportFragmentManager().beginTransaction().replace(R.id.mainContainer, loginFragment).commit();//로그인 화면
 
+        }else if(idx == 6){
+            //가입화면
+            getSupportFragmentManager().beginTransaction().replace(R.id.mainContainer, joinPageFragment).commit();
         }
     }
     public HideKeyboard getHideKeyboard(){

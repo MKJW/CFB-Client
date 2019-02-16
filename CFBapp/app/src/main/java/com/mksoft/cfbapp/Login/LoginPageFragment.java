@@ -23,6 +23,7 @@ public class LoginPageFragment extends Fragment {
     EditText loginProjectLoginPageIdEditText;
     EditText loginProjectLoginPagePwEditText;
     Button loginProjectLoginPageLoginButton;
+    Button loginProjectLoginPageJoinButton;
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -42,6 +43,7 @@ public class LoginPageFragment extends Fragment {
         hideKeyboard();
         clickHideKeyboard();
         clickLoginButton();
+        clickJoinButton();
         return rootView;
     }
     private void initUI(ViewGroup rootView){
@@ -49,6 +51,7 @@ public class LoginPageFragment extends Fragment {
         loginProjectLoginPageIdEditText = rootView.findViewById(R.id.loginProjectLoginPageIdEditText);
         loginProjectLoginPagePwEditText = rootView.findViewById(R.id.loginProjectLoginPagePwEditText);
         loginProjectLoginPageLoginButton = rootView.findViewById(R.id.loginProjectLoginPageLoginButton);
+        loginProjectLoginPageJoinButton = rootView.findViewById(R.id.loginProjectLoginPageJoinButton);
     }
     private void hideKeyboard(){
         mainActivity.getHideKeyboard().hideKeyboard();
@@ -76,6 +79,14 @@ public class LoginPageFragment extends Fragment {
                             );
 
                 }
+            }
+        });
+    }
+    private void clickJoinButton(){
+        loginProjectLoginPageJoinButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mainActivity.onFragmentChange(6, null);
             }
         });
     }
