@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+<RelativeLayout
+    android:id="@+id/loginProjectMakeIdRelativeLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="10dp">
+
+
+    <LinearLayout
+        android:id="@+id/loginProjectMakeIdIDLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentTop="true">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ID"
+            android:textSize="30dp"
+            android:textStyle="bold"/>
+
+
+            <EditText
+                android:layout_marginTop="10dp"
+                android:id="@+id/loginProjectMakeIdIDEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:layout_weight="1"
+                android:hint="ID"/>
+
+        <TextView
+            android:id="@+id/loginProjectMakeIdIDstate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#83f162"
+            android:textSize="10dp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/loginProjectMakeIdPWLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/loginProjectMakeIdIDLayout"
+        android:orientation="vertical"
+        android:layout_marginTop="15dp">
+
+        <TextView
+            android:textStyle="bold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="PW"
+            android:textSize="30dp"/>
+
+        <EditText
+            android:layout_marginTop="10dp"
+            android:id="@+id/loginProjectMakeIdPWEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPassword"
+            android:hint="비밀번호"/>
+
+        <EditText
+            android:layout_marginTop="10dp"
+            android:id="@+id/loginProjectMakeIdPWCheckEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPassword"
+            android:hint="비밀번호 확인"/>
+
+        <TextView
+            android:id="@+id/loginProjectMakeIdPWstate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="10dp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="15dp"
+        android:id="@+id/loginProjectMakeIdEmailLayout"
+        android:layout_below="@+id/loginProjectMakeIdPWLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Email"
+            android:textSize="30dp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/loginProjectMakeIdEmailEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:hint="email"
+            android:inputType="textPersonName" />
+
+        <TextView
+            android:id="@+id/loginProjectMakeIdEmailstate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="10dp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <Button
+        android:layout_marginTop="15dp"
+
+        android:layout_below="@+id/loginProjectMakeIdEmailLayout"
+        android:id="@+id/loginProjectMakeIdJoinButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="JOIN" />
+
+    <Button
+        android:layout_marginTop="10dp"
+        android:id="@+id/loginProjectMakeIdBackButton"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/loginProjectMakeIdJoinButton"
+        android:text="BACK" />
+
+</RelativeLayout>
+</ScrollView>
