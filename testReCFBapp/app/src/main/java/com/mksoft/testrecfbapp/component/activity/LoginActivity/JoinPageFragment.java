@@ -15,11 +15,13 @@ import android.widget.TextView;
 import com.mksoft.testrecfbapp.R;
 import com.mksoft.testrecfbapp.component.activity.MainActivity;
 
+import org.mozilla.javascript.tools.jsc.Main;
+
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 public class JoinPageFragment extends Fragment implements MainActivity.onKeyBackPressedListener{
-    MainActivity mainActivity;
+
 
     RelativeLayout joinPageRelativeLayout;
 
@@ -46,8 +48,7 @@ public class JoinPageFragment extends Fragment implements MainActivity.onKeyBack
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        mainActivity = (MainActivity)getActivity();
-        ((MainActivity) context).setOnKeyBackPressedListener(this);
+        ((LoginRootActivity) context).setOnKeyBackPressedListener(this);
     }
     @Override
     public View onCreateView(LayoutInflater inflater,
@@ -82,7 +83,7 @@ public class JoinPageFragment extends Fragment implements MainActivity.onKeyBack
         IDPWEmailStateCheck = new IDPWEmailStateCheck();
     }
     private void hideKeyboard(){
-        mainActivity.getHideKeyboard().hideKeyboard();
+        MainActivity.mainActivity.getHideKeyboard().hideKeyboard();
     }
     private void clickHideKeyboard(){
         joinPageRelativeLayout.setOnClickListener(new View.OnClickListener() {
@@ -173,8 +174,8 @@ public class JoinPageFragment extends Fragment implements MainActivity.onKeyBack
 
     @Override
     public void onBackKey() {
-        mainActivity = (MainActivity) getActivity();
-        mainActivity.setOnKeyBackPressedListener(null);
-        mainActivity.onBackPressed();
+
+        LoginRootActivity.loginRootActivity.setOnKeyBackPressedListener(null);
+        LoginRootActivity.loginRootActivity.onBackPressed();
     }
 }

@@ -14,6 +14,8 @@ import com.mksoft.testrecfbapp.R;
 import com.mksoft.testrecfbapp.Repository.LoginRepo;
 import com.mksoft.testrecfbapp.component.activity.MainActivity;
 
+import org.mozilla.javascript.tools.jsc.Main;
+
 import javax.inject.Inject;
 
 import androidx.annotation.Nullable;
@@ -24,7 +26,6 @@ import dagger.android.support.AndroidSupportInjection;
 
 public class LoginPageFragment extends Fragment {
 
-    MainActivity mainActivity;
     RelativeLayout loginProjectLoginPageRelativeLayout;
     EditText loginProjectLoginPageIdEditText;
     EditText loginProjectLoginPagePwEditText;
@@ -49,8 +50,7 @@ public class LoginPageFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        mainActivity = (MainActivity)getActivity();
-        ((MainActivity) context).setOnKeyBackPressedListener(null);
+        ((LoginRootActivity) context).setOnKeyBackPressedListener(null);
     }
     @Override
     public View onCreateView(LayoutInflater inflater,
@@ -72,7 +72,7 @@ public class LoginPageFragment extends Fragment {
         loginProjectLoginPageJoinButton = rootView.findViewById(R.id.loginProjectLoginPageJoinButton);
     }
     private void hideKeyboard(){
-        mainActivity.getHideKeyboard().hideKeyboard();
+        MainActivity.mainActivity.getHideKeyboard().hideKeyboard();
     }
     private void clickHideKeyboard(){
         loginProjectLoginPageRelativeLayout.setOnClickListener(new View.OnClickListener() {
@@ -93,7 +93,7 @@ public class LoginPageFragment extends Fragment {
                             loginProjectLoginPagePwEditText.getText().toString(),
                             loginProjectLoginPageIdEditText.getText().toString(),
                             loginProjectLoginPagePwEditText.getText().toString(),
-                            mainActivity
+                            MainActivity.mainActivity
                             );
 
                 }
@@ -106,8 +106,8 @@ public class LoginPageFragment extends Fragment {
             public void onClick(View v) {
 
                 fragmentTransaction = getFragmentManager().beginTransaction();
-                MainActivity.mainActivity.getSupportFragmentManager().popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-                fragmentTransaction.replace(R.id.mainContainer, new JoinPageFragment(), null);
+                LoginRootActivity.loginRootActivity.getSupportFragmentManager().popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                fragmentTransaction.replace(R.id.loginrootmainContainer, new JoinPageFragment(), null);
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
             }

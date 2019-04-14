@@ -1,11 +1,13 @@
 package com.mksoft.testrecfbapp.component.activity;
 
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.FrameLayout;
 
 import com.mksoft.testrecfbapp.R;
+import com.mksoft.testrecfbapp.component.activity.LoginActivity.LoginRootActivity;
 import com.mksoft.testrecfbapp.component.activity.fragment.CaculateOfFuction.CaculateOfFunctionFragment;
 import com.mksoft.testrecfbapp.component.activity.fragment.FunctionAddPage.MakeFunctionFragment;
 import com.mksoft.testrecfbapp.component.activity.fragment.FunctionAddPage.TitleAndHashTagOfFunctionFragment;
@@ -129,8 +131,8 @@ public class MainActivity extends AppCompatActivity implements HasSupportFragmen
         if(access_token != null && access_token != ""){
             getSupportFragmentManager().beginTransaction().replace(R.id.mainContainer, mainButtonFragment).commit();//처음 기본 플레그먼트 설정
         }else{
-            getSupportFragmentManager().beginTransaction().replace(R.id.mainContainer, loginFragment).commit();//로그인 화면
-
+            Intent intent = new Intent(this, LoginRootActivity.class);
+            startActivity(intent);
         }
 
     }
