@@ -1,4 +1,4 @@
-package com.mksoft.testrecfbapp.component.activity.fragment.LoginPage;
+package com.mksoft.testrecfbapp.component.activity.LoginActivity;
 
 import android.util.Log;
 
@@ -28,13 +28,13 @@ public class IDPWEmailStateCheck {
         boolean pwAZCharState= false;
 
         for(int i =0; i<pw1.length(); i++){
-            if((pw1.charAt(i)>= 33 && pw1.charAt(i) <=47) || (pw1.charAt(i)>= 58 && pw1.charAt(i) <=64) || (pw1.charAt(i)>= 91 && pw1.charAt(i) <=96)
-                    ||(pw1.charAt(i)>= 123 && pw1.charAt(i) <=126)){
+            if((pw1.charAt(i)>= '!' && pw1.charAt(i) <='/') || (pw1.charAt(i)>= ':' && pw1.charAt(i) <='@') || (pw1.charAt(i)>= '[' && pw1.charAt(i) <'a')
+                    ||(pw1.charAt(i)>= '{' && pw1.charAt(i) <='~')){
 
                 pwSpeciaCharlState = true;
-            }else if((pw1.charAt(i)>= 48 && pw1.charAt(i) <=57)){
+            }else if((pw1.charAt(i)>= '0' && pw1.charAt(i) <='9')){
                 pwNumCharlState = true;
-            }else if((pw1.charAt(i)>= 65 && pw1.charAt(i) <=90)||(pw1.charAt(i)>= 97 && pw1.charAt(i) <=122)){
+            }else if((pw1.charAt(i)>= 'A' && pw1.charAt(i) <='Z')||(pw1.charAt(i)>= 'a' && pw1.charAt(i) <='z')){
                 pwAZCharState = true;
             }
         }
@@ -58,13 +58,14 @@ public class IDPWEmailStateCheck {
         boolean emailAtCharState = false;
         boolean emailDotCharState = false;
         boolean emailNotCharState = false;
+
         for(int i =0; i<email.length(); i++){
             if(email.charAt(i) == '@'){
                 emailAtCharState = true;
             }else if(email.charAt(i) == '.'){
                 emailDotCharState = true;
-            }else if((email.charAt(i)>= 33 && email.charAt(i) <=47) || (email.charAt(i)>= 58 && email.charAt(i) <=64) || (email.charAt(i)>= 91 && email.charAt(i) <=96)
-                    ||(email.charAt(i)>= 123 && email.charAt(i) <=126)){
+            }else if((email.charAt(i)>= '!' && email.charAt(i) <='/') || (email.charAt(i)>= ':' && email.charAt(i) <='@') || (email.charAt(i)>= '[' && email.charAt(i) <'a')
+                    ||(email.charAt(i)>= '{' && email.charAt(i) <='~')){
 
                 emailNotCharState = true;
             }
@@ -73,6 +74,7 @@ public class IDPWEmailStateCheck {
             emailState = false;
             return "이메일 형식이 맞지 않습니다.";
         }
+        //가입된 이메일 체크...
         emailState = true;
         return "사용가능 이메일";
     }

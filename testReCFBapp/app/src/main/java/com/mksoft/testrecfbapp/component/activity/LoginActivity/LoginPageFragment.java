@@ -1,4 +1,4 @@
-package com.mksoft.testrecfbapp.component.activity.fragment.LoginPage;
+package com.mksoft.testrecfbapp.component.activity.LoginActivity;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -18,6 +18,8 @@ import javax.inject.Inject;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import dagger.android.support.AndroidSupportInjection;
 
 public class LoginPageFragment extends Fragment {
@@ -28,6 +30,9 @@ public class LoginPageFragment extends Fragment {
     EditText loginProjectLoginPagePwEditText;
     Button loginProjectLoginPageLoginButton;
     Button loginProjectLoginPageJoinButton;
+
+    FragmentTransaction fragmentTransaction;
+
     @Inject
     LoginRepo loginRepo;
     @Override
@@ -45,6 +50,7 @@ public class LoginPageFragment extends Fragment {
     public void onAttach(Context context) {
         super.onAttach(context);
         mainActivity = (MainActivity)getActivity();
+        ((MainActivity) context).setOnKeyBackPressedListener(null);
     }
     @Override
     public View onCreateView(LayoutInflater inflater,
@@ -98,7 +104,12 @@ public class LoginPageFragment extends Fragment {
         loginProjectLoginPageJoinButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mainActivity.onFragmentChange(6, null);
+
+                fragmentTransaction = getFragmentManager().beginTransaction();
+                MainActivity.mainActivity.getSupportFragmentManager().popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                fragmentTransaction.replace(R.id.mainContainer, new JoinPageFragment(), null);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
             }
         });
     }

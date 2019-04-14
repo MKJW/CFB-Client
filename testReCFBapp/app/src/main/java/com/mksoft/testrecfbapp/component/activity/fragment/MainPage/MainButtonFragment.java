@@ -29,12 +29,12 @@ public class MainButtonFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-
     }
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         mainActivity = (MainActivity)getActivity();
+        ((MainActivity) context).setOnKeyBackPressedListener(null);
     }
     @Override
     public View onCreateView(LayoutInflater inflater,

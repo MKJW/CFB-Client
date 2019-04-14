@@ -9,8 +9,8 @@ import com.mksoft.testrecfbapp.R;
 import com.mksoft.testrecfbapp.component.activity.fragment.CaculateOfFuction.CaculateOfFunctionFragment;
 import com.mksoft.testrecfbapp.component.activity.fragment.FunctionAddPage.MakeFunctionFragment;
 import com.mksoft.testrecfbapp.component.activity.fragment.FunctionAddPage.TitleAndHashTagOfFunctionFragment;
-import com.mksoft.testrecfbapp.component.activity.fragment.LoginPage.JoinPageFragment;
-import com.mksoft.testrecfbapp.component.activity.fragment.LoginPage.LoginPageFragment;
+import com.mksoft.testrecfbapp.component.activity.LoginActivity.JoinPageFragment;
+import com.mksoft.testrecfbapp.component.activity.LoginActivity.LoginPageFragment;
 import com.mksoft.testrecfbapp.component.activity.fragment.MainPage.MainButtonFragment;
 import com.mksoft.testrecfbapp.otherMethod.HideKeyboard;
 
@@ -37,6 +37,11 @@ public class MainActivity extends AppCompatActivity implements HasSupportFragmen
     SharedPreferences pref;
     String access_token;
 
+
+    BackPressCloseHandler backPressCloseHandler;
+    public static MainActivity mainActivity;
+
+
     @Inject
     DispatchingAndroidInjector<Fragment> dispatchingAndroidInjector;
 
@@ -44,6 +49,7 @@ public class MainActivity extends AppCompatActivity implements HasSupportFragmen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mainActivity = this;
         this.configureDagger();
         init();
     }
@@ -59,16 +65,23 @@ public class MainActivity extends AppCompatActivity implements HasSupportFragmen
 
     private void init(){
         tokenInit();
-        joinPageFragment = new JoinPageFragment();
+        backPressCloseHandler = new BackPressCloseHandler(this);
         mainButtonFragment = new MainButtonFragment();
-        makeFunctionFragment = new MakeFunctionFragment();
-        titleAndHashTagOfFunctionFragment = new TitleAndHashTagOfFunctionFragment();
-        caculateOfFunctionFragment = new CaculateOfFunctionFragment();
         hideKeyboard = new HideKeyboard(this);
         loginFragment = new LoginPageFragment();
         mainContainer = findViewById(R.id.mainContainer);
         startPageSelect();
+
+
+
+
+        makeFunctionFragment = new MakeFunctionFragment();
+        titleAndHashTagOfFunctionFragment = new TitleAndHashTagOfFunctionFragment();
+        caculateOfFunctionFragment = new CaculateOfFunctionFragment();
+        joinPageFragment = new JoinPageFragment();
+
     }
+
     public void onFragmentChange(int idx, Bundle bundle){
         if(idx == 1){
 
@@ -104,6 +117,7 @@ public class MainActivity extends AppCompatActivity implements HasSupportFragmen
     public void tokenInit(){
         pref = getSharedPreferences("pref", MODE_PRIVATE);
         access_token = pref.getString("access_token", "");
+        //토큰이 있으면 토큰을 받고 없으면 default 값인 ""을 받자.
 
     }
     private void tokenRemove(){
@@ -122,5 +136,28 @@ public class MainActivity extends AppCompatActivity implements HasSupportFragmen
     }
     public String getAccess_token(){
         return access_token;
+    }
+    ////////////////////// back key
+
+    public interface onKeyBackPressedListener{
+        void onBackKey();
+    }
+    private onKeyBackPressedListener mOnKeyBackPressedListener;
+    public void setOnKeyBackPressedListener(onKeyBackPressedListener listener){
+        mOnKeyBackPressedListener = listener;
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(mOnKeyBackPressedListener != null) {
+            mOnKeyBackPressedListener.onBackKey();
+        }else{
+            if(getSupportFragmentManager().getBackStackEntryCount() == 0){
+                backPressCloseHandler.onBackPressed();
+            }
+            else{
+                super.onBackPressed();
+            }
+        }
     }
 }
